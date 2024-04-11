@@ -1,12 +1,17 @@
 import express, { Express, Request, Response } from "express";
+import pool from './db/dbInitiator'
+import routes from './routes';
 
 const app: Express = express()
-const port = 3000
+const PORT = 8000
 
-app.get('/', (req: Request, res: Response) => {
-  res.send({'message': 'Hello World!'})
-})
+app.use(express.json())
+app.use('/', routes)
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+  pool.query('SELECT 1+1 AS solution').then(() => {
+    console.log('Connected to database')
+  }).catch((err) => {
+    console.log('Failed to connect to database with the following error: ', err)
+  })
 })

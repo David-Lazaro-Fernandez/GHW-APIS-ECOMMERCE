@@ -1,4 +1,5 @@
 import db from '../models';
+import { Request, Response } from 'express';
 
 const User = db.users;
 
@@ -18,7 +19,7 @@ class UserController {
      * @param {import('express').Response} res - The HTTP Response.
      * @returns {Promise<void>}
     */
-    async createUser(req, res) {
+    async createUser(req:Request, res:Response) {
         try {
             // Create a User
             const user = {
@@ -30,7 +31,7 @@ class UserController {
             const data = await User.create(user);
             res.status(201).send(data);
         }
-        catch (error) {
+        catch (error: any) {
             res.status(500).send({
                 message: error.message || "Some error occurred while creating the User."
             });
@@ -41,16 +42,16 @@ class UserController {
      * Fetches all the users from the users table and returns them as a JSON object.
      *
      * @param {import('express').Request} req - The HTTP Request. 
-     * @param {import('express').Request} res - The HTTP Response.
+     * @param {import('express').Response} res - The HTTP Response.
      * @returns {Promise<void>}
      */
 
-    async readUsers(req, res) {
+    async readUsers(req:Request, res:Response) {
         try {
             const data = await User.findAll();
             res.status(200).send(data);
         }
-        catch (error) {
+        catch (error:any) {
             res.status(500).send({
                 message: error.message || "Some error occurred while retrieving users."
             });
@@ -62,11 +63,11 @@ class UserController {
      * Update an user info by the id in the request body.
      *
      * @param {import('express').Request} req - The HTTP Request. 
-     * @param {import('express').Request} res - The HTTP Response.
+     * @param {import('express').Response} res - The HTTP Response.
      * @returns {Promise<void>}
      */
 
-    async updateUser(req, res) {
+    async updateUser(req:Request, res:Response) {
         const uid = req.params.id;
         try {
             const data = await User.update(req.body, {
@@ -82,7 +83,7 @@ class UserController {
                 });
             }
         }
-        catch (error) {
+        catch (error:any) {
             res.status(500).send({
                 message: error.message || `Error updating User with id=${uid}`
             });
@@ -93,11 +94,11 @@ class UserController {
      * Deletes an user from the database by the id of the user.
      *
      * @param {import('express').Request} req - The HTTP Request. 
-     * @param {import('express').Request} res - The HTTP Response.
+     * @param {import('express').Response} res - The HTTP Response.
      * @returns {Promise<void>}
      */
 
-    async deleteUser(req, res) {
+    async deleteUser(req:Request, res:Response) {
         const uid = req.params.id;
         try {
             const data = await User.destroy({
@@ -113,7 +114,7 @@ class UserController {
                 });
             }
         }
-        catch (error) {
+        catch (error:any) {
             res.status(500).send({
                 message: error.message || `Could not delete User with id=${uid}`
             });
@@ -122,4 +123,4 @@ class UserController {
     }
 }
 
-export default UserController;
+export default new UserController();
