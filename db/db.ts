@@ -1,7 +1,7 @@
 const dbConfig = {
     host: "localhost",
-    user: "root",
-    password: '',
+    user: "hacker",
+    password: 'hack',
     database: "ecommerce",
 }
 

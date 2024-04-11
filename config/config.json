@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "hacker",
-    "password": null,
-    "database": "database_development",
+    "password": "hack",
+    "database": "ecommerce",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "waitForConnections": true,
